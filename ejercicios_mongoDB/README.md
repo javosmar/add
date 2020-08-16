@@ -54,7 +54,8 @@ db.facturas.findOne({},{_id:0})
 * Obtener las facturas con fecha de emisión posterior al 23/02/2014 y número menor
 a 1500. Ordenar por región y cuit del cliente
 ```sh
-db.facturas.find( { fechaEmision: {$gt:ISODate("2014-02-23T00:00:00Z")}, nroFactura: {$lt:1500} }, {} ).sort({"cliente.region": 1, "cliente.cuit":1})
+db.facturas.find( { fechaEmision: {$gt:ISODate("2014-02-23T00:00:00Z")}, 
+                nroFactura: {$lt:1500} }, {} ).sort({"cliente.region": 1, "cliente.cuit":1})
 ```
 ```sh
 {
@@ -140,7 +141,8 @@ db.facturas.find({"cliente.apellido":/^Z/},{}).sort({"nroFactura":1}).limit(5)
 condición de pago sea “CONTADO”. Ordenar descendentemente por número de
 factura y devolver de la 5 a la 10.
 ```sh
-db.facturas.find({$or:[{"cliente.region":"CENTRO"},{"condPago":"CONTADO"}]},{"nroFactura":1,"_id":0}).sort({"nroFactura":-1}).skip(5).limit(5)
+db.facturas.find({$or:[{"cliente.region":"CENTRO"},{"condPago":"CONTADO"}]},
+                {"nroFactura":1,"_id":0}).sort({"nroFactura":-1}).skip(5).limit(5)
 ```
 ```sh
 { "nroFactura" : 1090 }
@@ -201,7 +203,9 @@ db.facturas.find({"item.cantidad":15},{"item.producto.$":1,"_id":0})
 * Obtener sólo una factura del cliente de cuit 2038373771, condición de pago “30 Ds
 FF” y fecha de vencimiento entre el 20/03/2014 y 24/03/2014.
 ```sh
-db.facturas.findOne({"cliente.cuit":2038373771,"condPago":"30 Ds FF","fechaVencimiento":{$gt:ISODate("2014-03-20T00:00:00Z"),$lt:ISODate("2014-03-24T00:00:00Z")}},{})
+db.facturas.findOne({"cliente.cuit":2038373771,
+                "condPago":"30 Ds FF",
+                "fechaVencimiento":{$gt:ISODate("2014-03-20T00:00:00Z"),$lt:ISODate("2014-03-24T00:00:00Z")}},{})
 ```
 ```sh
 {
@@ -450,7 +454,8 @@ WriteResult({ "nRemoved" : 15 })
 ```
 * Obtener la factura con el mayor nroFactura del cliente de apellido Lavagno donde haya comprado “SET HERRAMIENTAS” y luego asegurarse de borrar únicamente esa factura.
 ```sh
-db.facturas.findOneAndDelete({"cliente.apellido":"Lavagno","item.producto":"SET HERRAMIENTAS"},{sort:{"nroFactura":-1}})
+db.facturas.findOneAndDelete({"cliente.apellido":"Lavagno","item.producto":"SET HERRAMIENTAS"},
+                        {sort:{"nroFactura":-1}})
 ```
 ```sh
 {
