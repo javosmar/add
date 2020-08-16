@@ -555,5 +555,6 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : ObjectId("5f399ca9e556dd1ebb6267b0"), "x" : 0.6073539426924899 }
 ```
 ```sh
-La forma de consultar el documento modificado es mediante el id del mismo, ya que al tratarse de una modificación total, el campo _id no se ve afectado por el cambio.
+La forma de consultar el documento modificado es mediante el id del mismo, ya que al tratarse de una modificación total, 
+el campo _id no se ve afectado por el cambio.
 ```
